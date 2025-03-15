@@ -29,6 +29,11 @@ class CreateUserTable extends Migration
                 'type' => 'VARCHAR',
                 'constraint' => 255,
             ],
+            'role' => [
+                'type'       => 'VARCHAR',
+                'constraint' => 50,
+                'unique'     => true,
+            ],
             'created_at' => [
                 'type'    => 'DATETIME',
                 'null'    => true,

@@ -183,10 +183,10 @@
                   <div class="alert alert-danger"><?= session()->getFlashdata('error') ?></div>
                 <?php endif; ?>
 
-                <form action="<?= base_url('/umkm/submit') ?>" method="post" enctype="multipart/form-data">
+                <form id="formUmkm" enctype="multipart/form-data">
                   <div class="mb-3">
-                    <label class="form-label">Nama Usaha</label>
-                    <input type="text" name="nama_usaha" class="form-control" required>
+                    <label class="form-label">Nama Usahsa</label>
+                    <input type="text" name="nama_usaha" class="form-control">
                   </div>
 
                   <div class="mb-3">
@@ -289,6 +289,86 @@
     </div>
 
   </div>
+
+  <script>
+    $(document).ready(function() {
+      $("#formUmkm").submit(function(e) {
+        e.preventDefault(); // Mencegah submit langsung
+
+        // Validasi jika ada input kosong
+        let isValid = true;
+        let errorMessage = '';
+
+        $(".required").each(function() {
+          if ($(this).val().trim() === '') {
+            isValid = false;
+            errorMessage = "Semua kolom wajib diisi!";
+            return false; // Stop iterasi jika ada yang kosong
+          }
+        });
+
+        if (!isValid) {
+          Swal.fire({
+            icon: "warning",
+            title: "Oops...",
+            text: errorMessage
+          });
+          return;
+        }
+
+        let formData = new FormData(this); // Ambil data form
+
+        $.ajax({
+          url: "<?= base_url('/umkm/submit') ?>",
+          type: "POST",
+          data: formData,
+          processData: false,
+          contentType: false,
+          dataType: "json",
+          beforeSend: function() {
+            Swal.fire({
+              title: "Processing...",
+              text: "Menyimpan data...",
+              allowOutsideClick: false,
+              didOpen: () => {
+                Swal.showLoading();
+              }
+            });
+          },
+          success: function(response) {
+            if (response.status === "success") {
+              Swal.fire({
+                icon: "success",
+                title: "Berhasil!",
+                text: response.message,
+                showConfirmButton: false,
+                timer: 2000
+              });
+
+              $("#formUmkm")[0].reset(); // Reset form jika berhasil
+            } else {
+              Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: response.message
+              });
+            }
+          },
+          error: function(xhr) {
+            let errorMessage = "Terjadi kesalahan.";
+            if (xhr.responseJSON && xhr.responseJSON.errors) {
+              errorMessage = Object.values(xhr.responseJSON.errors).join("\n");
+            }
+            Swal.fire({
+              icon: "error",
+              title: "Oops...",
+              text: errorMessage
+            });
+          }
+        });
+      });
+    });
+  </script>
 
   <!-- Javascripts -->
   <script src="<?= base_url(); ?>plugins/jquery/jquery-3.4.1.min.js"></script>

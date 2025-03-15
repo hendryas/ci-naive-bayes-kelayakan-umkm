@@ -7,6 +7,9 @@ use CodeIgniter\Router\RouteCollection;
  */
 $routes->get('/', 'Home::index');
 $routes->get('form-registration', 'Home::formRegistration');
+$routes->group('form-umkm', function ($routes) {
+  $routes->post('submit', 'FormUMKMController::submit');
+});
 
 $routes->group('auth', function ($routes) {
   $routes->get('/', 'AuthenticationController::index');

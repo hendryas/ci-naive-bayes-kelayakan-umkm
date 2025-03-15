@@ -1,0 +1,20 @@
+CRITICAL - 2025-03-15 13:25:33 --> Error: Class "App\Controllers\UmkmModel" not found
+[Method: POST, Route: form-umkm/submit]
+in APPPATH\Controllers\FormUMKMController.php on line 17.
+ 1 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\FormUMKMController->submit()
+ 2 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\FormUMKMController))
+ 3 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 6 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ 7 SYSTEMPATH\rewrite.php(44): require_once('C:\\laragon\\www\\umkm-kelayakan\\public\\index.php')
+CRITICAL - 2025-03-15 13:33:40 --> Error: Class "App\Controllers\UmkmModel" not found
+[Method: POST, Route: form-umkm/submit]
+in APPPATH\Controllers\FormUMKMController.php on line 17.
+ 1 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\FormUMKMController->submit()
+ 2 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\FormUMKMController))
+ 3 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 6 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ 7 SYSTEMPATH\rewrite.php(44): require_once('C:\\laragon\\www\\umkm-kelayakan\\public\\index.php')

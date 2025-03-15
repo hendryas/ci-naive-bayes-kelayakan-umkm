@@ -1,0 +1,210 @@
+CRITICAL - 2025-03-13 13:33:55 --> CodeIgniter\HTTP\Exceptions\BadRequestException: The URI you submitted has disallowed characters: "logo@2x.png"
+[Method: GET, Route: assets/images/logo@2x.png]
+in SYSTEMPATH\Router\Router.php on line 739.
+ 1 SYSTEMPATH\Router\Router.php(207): CodeIgniter\Router\Router->checkDisallowedChars('assets/images/logo@2x.png')
+ 2 SYSTEMPATH\CodeIgniter.php(832): CodeIgniter\Router\Router->handle('assets/images/logo@2x.png')
+ 3 SYSTEMPATH\CodeIgniter.php(455): CodeIgniter\CodeIgniter->tryToRouteIt(Object(CodeIgniter\Router\RouteCollection))
+ 4 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ 8 SYSTEMPATH\rewrite.php(44): require_once('C:\\laragon\\www\\umkm-kelayakan\\public\\index.php')
+ERROR - 2025-03-13 13:33:58 --> Error connecting to the database: mysqli_sql_exception: Access denied for user 'root'@'localhost' (using password: NO) in C:\laragon\www\umkm-kelayakan\system\Database\MySQLi\Connection.php:201
+Stack trace:
+#0 C:\laragon\www\umkm-kelayakan\system\Database\MySQLi\Connection.php(201): mysqli->real_connect('localhost', 'root', Object(SensitiveParameterValue), 'ci_umkm_kelayak...', 3306, '', 0)
+#1 C:\laragon\www\umkm-kelayakan\system\Database\BaseConnection.php(421): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#2 C:\laragon\www\umkm-kelayakan\system\Database\BaseConnection.php(620): CodeIgniter\Database\BaseConnection->initialize()
+#3 C:\laragon\www\umkm-kelayakan\system\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 C:\laragon\www\umkm-kelayakan\system\Model.php(330): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\laragon\www\umkm-kelayakan\system\BaseModel.php(713): CodeIgniter\Model->doFirst()
+#6 C:\laragon\www\umkm-kelayakan\app\Controllers\AuthenticationController.php(31): CodeIgniter\BaseModel->first()
+#7 C:\laragon\www\umkm-kelayakan\system\CodeIgniter.php(933): App\Controllers\AuthenticationController->login()
+#8 C:\laragon\www\umkm-kelayakan\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AuthenticationController))
+#9 C:\laragon\www\umkm-kelayakan\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 C:\laragon\www\umkm-kelayakan\system\Boot.php(334): CodeIgniter\CodeIgniter->run()
+#11 C:\laragon\www\umkm-kelayakan\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#12 C:\laragon\www\umkm-kelayakan\public\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#13 C:\laragon\www\umkm-kelayakan\system\rewrite.php(44): require_once('C:\\laragon\\www\\...')
+#14 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: Access denied for user '****'@'localhost' (using password: NO) in C:\laragon\www\umkm-kelayakan\system\Database\MySQLi\Connection.php:246
+Stack trace:
+#0 C:\laragon\www\umkm-kelayakan\system\Database\BaseConnection.php(421): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#1 C:\laragon\www\umkm-kelayakan\system\Database\BaseConnection.php(620): CodeIgniter\Database\BaseConnection->initialize()
+#2 C:\laragon\www\umkm-kelayakan\system\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#3 C:\laragon\www\umkm-kelayakan\system\Model.php(330): CodeIgniter\Database\BaseBuilder->get()
+#4 C:\laragon\www\umkm-kelayakan\system\BaseModel.php(713): CodeIgniter\Model->doFirst()
+#5 C:\laragon\www\umkm-kelayakan\app\Controllers\AuthenticationController.php(31): CodeIgniter\BaseModel->first()
+#6 C:\laragon\www\umkm-kelayakan\system\CodeIgniter.php(933): App\Controllers\AuthenticationController->login()
+#7 C:\laragon\www\umkm-kelayakan\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AuthenticationController))
+#8 C:\laragon\www\umkm-kelayakan\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\laragon\www\umkm-kelayakan\system\Boot.php(334): CodeIgniter\CodeIgniter->run()
+#10 C:\laragon\www\umkm-kelayakan\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#11 C:\laragon\www\umkm-kelayakan\public\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#12 C:\laragon\www\umkm-kelayakan\system\rewrite.php(44): require_once('C:\\laragon\\www\\...')
+#13 {main}
+CRITICAL - 2025-03-13 13:33:58 --> CodeIgniter\Database\Exceptions\DatabaseException: Unable to connect to the database.
+Main connection [MySQLi]: Access denied for user '****'@'localhost' (using password: NO)
+[Method: POST, Route: auth/login]
+in SYSTEMPATH\Database\BaseConnection.php on line 467.
+ 1 SYSTEMPATH\Database\BaseConnection.php(620): CodeIgniter\Database\BaseConnection->initialize()
+ 2 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `users`
+WHERE `username` = :username:
+ LIMIT 1', [...], false)
+ 3 SYSTEMPATH\Model.php(330): CodeIgniter\Database\BaseBuilder->get()
+ 4 SYSTEMPATH\BaseModel.php(713): CodeIgniter\Model->doFirst()
+ 5 APPPATH\Controllers\AuthenticationController.php(31): CodeIgniter\BaseModel->first()
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AuthenticationController->login()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AuthenticationController))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('C:\\laragon\\www\\umkm-kelayakan\\public\\index.php')
+ERROR - 2025-03-13 13:34:00 --> Error connecting to the database: mysqli_sql_exception: Access denied for user 'root'@'localhost' (using password: NO) in C:\laragon\www\umkm-kelayakan\system\Database\MySQLi\Connection.php:201
+Stack trace:
+#0 C:\laragon\www\umkm-kelayakan\system\Database\MySQLi\Connection.php(201): mysqli->real_connect('localhost', 'root', Object(SensitiveParameterValue), 'ci_umkm_kelayak...', 3306, '', 0)
+#1 C:\laragon\www\umkm-kelayakan\system\Database\BaseConnection.php(421): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#2 C:\laragon\www\umkm-kelayakan\system\Database\BaseConnection.php(620): CodeIgniter\Database\BaseConnection->initialize()
+#3 C:\laragon\www\umkm-kelayakan\system\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 C:\laragon\www\umkm-kelayakan\system\Model.php(330): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\laragon\www\umkm-kelayakan\system\BaseModel.php(713): CodeIgniter\Model->doFirst()
+#6 C:\laragon\www\umkm-kelayakan\app\Controllers\AuthenticationController.php(31): CodeIgniter\BaseModel->first()
+#7 C:\laragon\www\umkm-kelayakan\system\CodeIgniter.php(933): App\Controllers\AuthenticationController->login()
+#8 C:\laragon\www\umkm-kelayakan\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AuthenticationController))
+#9 C:\laragon\www\umkm-kelayakan\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 C:\laragon\www\umkm-kelayakan\system\Boot.php(334): CodeIgniter\CodeIgniter->run()
+#11 C:\laragon\www\umkm-kelayakan\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#12 C:\laragon\www\umkm-kelayakan\public\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#13 C:\laragon\www\umkm-kelayakan\system\rewrite.php(44): require_once('C:\\laragon\\www\\...')
+#14 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: Access denied for user '****'@'localhost' (using password: NO) in C:\laragon\www\umkm-kelayakan\system\Database\MySQLi\Connection.php:246
+Stack trace:
+#0 C:\laragon\www\umkm-kelayakan\system\Database\BaseConnection.php(421): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#1 C:\laragon\www\umkm-kelayakan\system\Database\BaseConnection.php(620): CodeIgniter\Database\BaseConnection->initialize()
+#2 C:\laragon\www\umkm-kelayakan\system\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#3 C:\laragon\www\umkm-kelayakan\system\Model.php(330): CodeIgniter\Database\BaseBuilder->get()
+#4 C:\laragon\www\umkm-kelayakan\system\BaseModel.php(713): CodeIgniter\Model->doFirst()
+#5 C:\laragon\www\umkm-kelayakan\app\Controllers\AuthenticationController.php(31): CodeIgniter\BaseModel->first()
+#6 C:\laragon\www\umkm-kelayakan\system\CodeIgniter.php(933): App\Controllers\AuthenticationController->login()
+#7 C:\laragon\www\umkm-kelayakan\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AuthenticationController))
+#8 C:\laragon\www\umkm-kelayakan\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\laragon\www\umkm-kelayakan\system\Boot.php(334): CodeIgniter\CodeIgniter->run()
+#10 C:\laragon\www\umkm-kelayakan\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#11 C:\laragon\www\umkm-kelayakan\public\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#12 C:\laragon\www\umkm-kelayakan\system\rewrite.php(44): require_once('C:\\laragon\\www\\...')
+#13 {main}
+CRITICAL - 2025-03-13 13:34:00 --> CodeIgniter\Database\Exceptions\DatabaseException: Unable to connect to the database.
+Main connection [MySQLi]: Access denied for user '****'@'localhost' (using password: NO)
+[Method: POST, Route: auth/login]
+in SYSTEMPATH\Database\BaseConnection.php on line 467.
+ 1 SYSTEMPATH\Database\BaseConnection.php(620): CodeIgniter\Database\BaseConnection->initialize()
+ 2 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `users`
+WHERE `username` = :username:
+ LIMIT 1', [...], false)
+ 3 SYSTEMPATH\Model.php(330): CodeIgniter\Database\BaseBuilder->get()
+ 4 SYSTEMPATH\BaseModel.php(713): CodeIgniter\Model->doFirst()
+ 5 APPPATH\Controllers\AuthenticationController.php(31): CodeIgniter\BaseModel->first()
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AuthenticationController->login()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AuthenticationController))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('C:\\laragon\\www\\umkm-kelayakan\\public\\index.php')
+ERROR - 2025-03-13 14:22:06 --> Error connecting to the database: mysqli_sql_exception: Access denied for user 'root'@'localhost' (using password: NO) in C:\laragon\www\umkm-kelayakan\system\Database\MySQLi\Connection.php:201
+Stack trace:
+#0 C:\laragon\www\umkm-kelayakan\system\Database\MySQLi\Connection.php(201): mysqli->real_connect('localhost', 'root', Object(SensitiveParameterValue), 'ci_umkm_kelayak...', 3306, '', 0)
+#1 C:\laragon\www\umkm-kelayakan\system\Database\BaseConnection.php(421): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#2 C:\laragon\www\umkm-kelayakan\system\Database\BaseConnection.php(620): CodeIgniter\Database\BaseConnection->initialize()
+#3 C:\laragon\www\umkm-kelayakan\system\Database\BaseConnection.php(1525): CodeIgniter\Database\BaseConnection->query('SHOW TABLES FRO...')
+#4 C:\laragon\www\umkm-kelayakan\system\Database\BaseConnection.php(1545): CodeIgniter\Database\BaseConnection->listTables()
+#5 C:\laragon\www\umkm-kelayakan\system\Database\MigrationRunner.php(758): CodeIgniter\Database\BaseConnection->tableExists('migrations')
+#6 C:\laragon\www\umkm-kelayakan\system\Database\MigrationRunner.php(162): CodeIgniter\Database\MigrationRunner->ensureTable()
+#7 C:\laragon\www\umkm-kelayakan\system\Commands\Database\Migrate.php(85): CodeIgniter\Database\MigrationRunner->latest(NULL)
+#8 C:\laragon\www\umkm-kelayakan\system\CLI\Commands.php(70): CodeIgniter\Commands\Database\Migrate->run(Array)
+#9 C:\laragon\www\umkm-kelayakan\system\CLI\Console.php(48): CodeIgniter\CLI\Commands->run('migrate', Array)
+#10 C:\laragon\www\umkm-kelayakan\system\Boot.php(360): CodeIgniter\CLI\Console->run()
+#11 C:\laragon\www\umkm-kelayakan\system\Boot.php(104): CodeIgniter\Boot::runCommand(Object(CodeIgniter\CLI\Console))
+#12 C:\laragon\www\umkm-kelayakan\spark(84): CodeIgniter\Boot::bootSpark(Object(Config\Paths))
+#13 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: Access denied for user '****'@'localhost' (using password: NO) in C:\laragon\www\umkm-kelayakan\system\Database\MySQLi\Connection.php:246
+Stack trace:
+#0 C:\laragon\www\umkm-kelayakan\system\Database\BaseConnection.php(421): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#1 C:\laragon\www\umkm-kelayakan\system\Database\BaseConnection.php(620): CodeIgniter\Database\BaseConnection->initialize()
+#2 C:\laragon\www\umkm-kelayakan\system\Database\BaseConnection.php(1525): CodeIgniter\Database\BaseConnection->query('SHOW TABLES FRO...')
+#3 C:\laragon\www\umkm-kelayakan\system\Database\BaseConnection.php(1545): CodeIgniter\Database\BaseConnection->listTables()
+#4 C:\laragon\www\umkm-kelayakan\system\Database\MigrationRunner.php(758): CodeIgniter\Database\BaseConnection->tableExists('migrations')
+#5 C:\laragon\www\umkm-kelayakan\system\Database\MigrationRunner.php(162): CodeIgniter\Database\MigrationRunner->ensureTable()
+#6 C:\laragon\www\umkm-kelayakan\system\Commands\Database\Migrate.php(85): CodeIgniter\Database\MigrationRunner->latest(NULL)
+#7 C:\laragon\www\umkm-kelayakan\system\CLI\Commands.php(70): CodeIgniter\Commands\Database\Migrate->run(Array)
+#8 C:\laragon\www\umkm-kelayakan\system\CLI\Console.php(48): CodeIgniter\CLI\Commands->run('migrate', Array)
+#9 C:\laragon\www\umkm-kelayakan\system\Boot.php(360): CodeIgniter\CLI\Console->run()
+#10 C:\laragon\www\umkm-kelayakan\system\Boot.php(104): CodeIgniter\Boot::runCommand(Object(CodeIgniter\CLI\Console))
+#11 C:\laragon\www\umkm-kelayakan\spark(84): CodeIgniter\Boot::bootSpark(Object(Config\Paths))
+#12 {main}
+ERROR - 2025-03-13 14:22:51 --> Error connecting to the database: mysqli_sql_exception: Unknown database 'ci_umkm_kelayakan' in C:\laragon\www\umkm-kelayakan\system\Database\MySQLi\Connection.php:201
+Stack trace:
+#0 C:\laragon\www\umkm-kelayakan\system\Database\MySQLi\Connection.php(201): mysqli->real_connect('localhost', 'root', Object(SensitiveParameterValue), 'ci_umkm_kelayak...', 3306, '', 0)
+#1 C:\laragon\www\umkm-kelayakan\system\Database\BaseConnection.php(421): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#2 C:\laragon\www\umkm-kelayakan\system\Database\BaseConnection.php(620): CodeIgniter\Database\BaseConnection->initialize()
+#3 C:\laragon\www\umkm-kelayakan\system\Database\BaseConnection.php(1525): CodeIgniter\Database\BaseConnection->query('SHOW TABLES FRO...')
+#4 C:\laragon\www\umkm-kelayakan\system\Database\BaseConnection.php(1545): CodeIgniter\Database\BaseConnection->listTables()
+#5 C:\laragon\www\umkm-kelayakan\system\Database\MigrationRunner.php(758): CodeIgniter\Database\BaseConnection->tableExists('migrations')
+#6 C:\laragon\www\umkm-kelayakan\system\Database\MigrationRunner.php(162): CodeIgniter\Database\MigrationRunner->ensureTable()
+#7 C:\laragon\www\umkm-kelayakan\system\Commands\Database\Migrate.php(85): CodeIgniter\Database\MigrationRunner->latest(NULL)
+#8 C:\laragon\www\umkm-kelayakan\system\CLI\Commands.php(70): CodeIgniter\Commands\Database\Migrate->run(Array)
+#9 C:\laragon\www\umkm-kelayakan\system\CLI\Console.php(48): CodeIgniter\CLI\Commands->run('migrate', Array)
+#10 C:\laragon\www\umkm-kelayakan\system\Boot.php(360): CodeIgniter\CLI\Console->run()
+#11 C:\laragon\www\umkm-kelayakan\system\Boot.php(104): CodeIgniter\Boot::runCommand(Object(CodeIgniter\CLI\Console))
+#12 C:\laragon\www\umkm-kelayakan\spark(84): CodeIgniter\Boot::bootSpark(Object(Config\Paths))
+#13 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: Unknown database 'ci_umkm_kelayakan' in C:\laragon\www\umkm-kelayakan\system\Database\MySQLi\Connection.php:246
+Stack trace:
+#0 C:\laragon\www\umkm-kelayakan\system\Database\BaseConnection.php(421): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#1 C:\laragon\www\umkm-kelayakan\system\Database\BaseConnection.php(620): CodeIgniter\Database\BaseConnection->initialize()
+#2 C:\laragon\www\umkm-kelayakan\system\Database\BaseConnection.php(1525): CodeIgniter\Database\BaseConnection->query('SHOW TABLES FRO...')
+#3 C:\laragon\www\umkm-kelayakan\system\Database\BaseConnection.php(1545): CodeIgniter\Database\BaseConnection->listTables()
+#4 C:\laragon\www\umkm-kelayakan\system\Database\MigrationRunner.php(758): CodeIgniter\Database\BaseConnection->tableExists('migrations')
+#5 C:\laragon\www\umkm-kelayakan\system\Database\MigrationRunner.php(162): CodeIgniter\Database\MigrationRunner->ensureTable()
+#6 C:\laragon\www\umkm-kelayakan\system\Commands\Database\Migrate.php(85): CodeIgniter\Database\MigrationRunner->latest(NULL)
+#7 C:\laragon\www\umkm-kelayakan\system\CLI\Commands.php(70): CodeIgniter\Commands\Database\Migrate->run(Array)
+#8 C:\laragon\www\umkm-kelayakan\system\CLI\Console.php(48): CodeIgniter\CLI\Commands->run('migrate', Array)
+#9 C:\laragon\www\umkm-kelayakan\system\Boot.php(360): CodeIgniter\CLI\Console->run()
+#10 C:\laragon\www\umkm-kelayakan\system\Boot.php(104): CodeIgniter\Boot::runCommand(Object(CodeIgniter\CLI\Console))
+#11 C:\laragon\www\umkm-kelayakan\spark(84): CodeIgniter\Boot::bootSpark(Object(Config\Paths))
+#12 {main}
+ERROR - 2025-03-13 14:26:14 --> mysqli_sql_exception: Unknown column 'role' in 'field list' in C:\laragon\www\umkm-kelayakan\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\laragon\www\umkm-kelayakan\system\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO `us...', 0)
+#1 C:\laragon\www\umkm-kelayakan\system\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `us...')
+#2 C:\laragon\www\umkm-kelayakan\system\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `us...')
+#3 C:\laragon\www\umkm-kelayakan\system\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `us...', Array, false)
+#4 C:\laragon\www\umkm-kelayakan\system\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+#5 C:\laragon\www\umkm-kelayakan\system\BaseModel.php(839): CodeIgniter\Model->doInsert(Array)
+#6 C:\laragon\www\umkm-kelayakan\system\Model.php(800): CodeIgniter\BaseModel->insert(Array, true)
+#7 C:\laragon\www\umkm-kelayakan\app\Database\Seeds\UsersSeeder.php(30): CodeIgniter\Model->insert(Array)
+#8 C:\laragon\www\umkm-kelayakan\system\Database\Seeder.php(147): App\Database\Seeds\UsersSeeder->run()
+#9 C:\laragon\www\umkm-kelayakan\system\Commands\Database\Seed.php(79): CodeIgniter\Database\Seeder->call('App\\Database\\Se...')
+#10 C:\laragon\www\umkm-kelayakan\system\CLI\Commands.php(70): CodeIgniter\Commands\Database\Seed->run(Array)
+#11 C:\laragon\www\umkm-kelayakan\system\CLI\Console.php(48): CodeIgniter\CLI\Commands->run('db:seed', Array)
+#12 C:\laragon\www\umkm-kelayakan\system\Boot.php(360): CodeIgniter\CLI\Console->run()
+#13 C:\laragon\www\umkm-kelayakan\system\Boot.php(104): CodeIgniter\Boot::runCommand(Object(CodeIgniter\CLI\Console))
+#14 C:\laragon\www\umkm-kelayakan\spark(84): CodeIgniter\Boot::bootSpark(Object(Config\Paths))
+#15 {main}
+CRITICAL - 2025-03-13 14:29:06 --> CodeIgniter\HTTP\Exceptions\BadRequestException: The URI you submitted has disallowed characters: "logo@2x.png"
+[Method: GET, Route: assets/images/logo@2x.png]
+in SYSTEMPATH\Router\Router.php on line 739.
+ 1 SYSTEMPATH\Router\Router.php(207): CodeIgniter\Router\Router->checkDisallowedChars('assets/images/logo@2x.png')
+ 2 SYSTEMPATH\CodeIgniter.php(832): CodeIgniter\Router\Router->handle('assets/images/logo@2x.png')
+ 3 SYSTEMPATH\CodeIgniter.php(455): CodeIgniter\CodeIgniter->tryToRouteIt(Object(CodeIgniter\Router\RouteCollection))
+ 4 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ 8 SYSTEMPATH\rewrite.php(44): require_once('C:\\laragon\\www\\umkm-kelayakan\\public\\index.php')

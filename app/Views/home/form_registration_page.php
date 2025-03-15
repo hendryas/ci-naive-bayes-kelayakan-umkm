@@ -13,6 +13,8 @@
   <link rel="stylesheet" href="<?= base_url(); ?>assets/css/fakeLoader.min.css">
   <link rel="stylesheet" href="<?= base_url(); ?>assets/css/magnific-popup.css">
   <link rel="stylesheet" href="<?= base_url(); ?>assets/css/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="<?= base_url(); ?>assets/js/jquery.min.js"></script>
 </head>
 
 <body>
@@ -64,10 +66,10 @@
                 <div class="alert alert-danger"><?= session()->getFlashdata('error') ?></div>
               <?php endif; ?>
 
-              <form action="<?= base_url('/umkm/submit') ?>" method="post" enctype="multipart/form-data">
+              <form id="formUmkm" enctype="multipart/form-data">
                 <div class="mb-3">
                   <label class="form-label">Nama Usaha</label>
-                  <input type="text" name="nama_usaha" class="form-control" required>
+                  <input type="text" name="nama_usaha" class="form-control">
                 </div>
 
                 <div class="mb-3">
@@ -77,7 +79,7 @@
 
                 <div class="mb-3">
                   <label class="form-label">No. Telepon</label>
-                  <input type="text" name="no_telepon" class="form-control" required>
+                  <input type="number" name="no_telepon" class="form-control" required onkeypress="return event.charCode >= 48 && event.charCode <= 57">
                 </div>
 
                 <div class="mb-3">
@@ -223,8 +225,87 @@
   </div>
   <!-- end footer bottom -->
 
+  <script>
+    $(document).ready(function() {
+      $("#formUmkm").submit(function(e) {
+        e.preventDefault(); // Mencegah submit langsung
+
+        // Validasi jika ada input kosong
+        let isValid = true;
+        let errorMessage = '';
+
+        $(".required").each(function() {
+          if ($(this).val().trim() === '') {
+            isValid = false;
+            errorMessage = "Semua kolom wajib diisi!";
+            return false; // Stop iterasi jika ada yang kosong
+          }
+        });
+
+        if (!isValid) {
+          Swal.fire({
+            icon: "warning",
+            title: "Oops...",
+            text: errorMessage
+          });
+          return;
+        }
+
+        let formData = new FormData(this); // Ambil data form
+
+        $.ajax({
+          url: "<?= base_url('/form-umkm/submit') ?>",
+          type: "POST",
+          data: formData,
+          processData: false,
+          contentType: false,
+          dataType: "json",
+          beforeSend: function() {
+            Swal.fire({
+              title: "Processing...",
+              text: "Menyimpan data...",
+              allowOutsideClick: false,
+              didOpen: () => {
+                Swal.showLoading();
+              }
+            });
+          },
+          success: function(response) {
+            if (response.status === "success") {
+              Swal.fire({
+                icon: "success",
+                title: "Berhasil!",
+                text: response.message,
+                showConfirmButton: false,
+                timer: 2000
+              });
+
+              $("#formUmkm")[0].reset(); // Reset form jika berhasil
+            } else {
+              Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: response.message
+              });
+            }
+          },
+          error: function(xhr) {
+            let errorMessage = "Terjadi kesalahan.";
+            if (xhr.responseJSON && xhr.responseJSON.errors) {
+              errorMessage = Object.values(xhr.responseJSON.errors).join("\n");
+            }
+            Swal.fire({
+              icon: "error",
+              title: "Oops...",
+              text: errorMessage
+            });
+          }
+        });
+      });
+    });
+  </script>
+
   <!-- script -->
-  <script src="<?= base_url(); ?>assets/js/jquery.min.js"></script>
   <script src="<?= base_url(); ?>assets/js/bootstrap.min.js"></script>
   <script src="<?= base_url(); ?>assets/js/fakeLoader.min.js"></script>
   <script src="<?= base_url(); ?>assets/js/jquery.filterizr.min.js"></script>
