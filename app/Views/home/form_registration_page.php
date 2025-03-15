@@ -67,9 +67,12 @@
               <?php endif; ?>
 
               <form id="formUmkm" enctype="multipart/form-data">
+
+                <!-- 📌 IDENTITAS USAHA -->
+                <h6 class="fw-bold">Identitas Usaha</h6>
                 <div class="mb-3">
                   <label class="form-label">Nama Usaha</label>
-                  <input type="text" name="nama_usaha" class="form-control">
+                  <input type="text" name="nama_usaha" class="form-control" required>
                 </div>
 
                 <div class="mb-3">
@@ -79,7 +82,7 @@
 
                 <div class="mb-3">
                   <label class="form-label">No. Telepon</label>
-                  <input type="number" name="no_telepon" class="form-control" required onkeypress="return event.charCode >= 48 && event.charCode <= 57">
+                  <input type="number" name="no_telepon" class="form-control" required>
                 </div>
 
                 <div class="mb-3">
@@ -95,11 +98,10 @@
                 <div class="mb-3">
                   <label class="form-label">Upload Logo Usaha (Maksimal 2MB, Format: JPG, PNG, JPEG)</label>
                   <input type="file" name="logo_usaha" class="form-control" accept="image/png, image/jpeg, image/jpg" required>
-                  <?php if (session()->getFlashdata('error')): ?>
-                    <small class="text-danger"><?= session()->getFlashdata('error') ?></small>
-                  <?php endif; ?>
                 </div>
 
+                <!-- 📌 INFORMASI KEUANGAN -->
+                <h6 class="fw-bold mt-4">Informasi Keuangan</h6>
                 <div class="mb-3">
                   <label class="form-label">Pendapatan Bulanan</label>
                   <select name="pendapatan" class="form-control">
@@ -110,28 +112,109 @@
                 </div>
 
                 <div class="mb-3">
-                  <label class="form-label">Jumlah Karyawan</label>
-                  <select name="jumlah_karyawan" class="form-control">
-                    <option value="Sedikit">Sedikit (1-5 orang)</option>
-                    <option value="Sedang">Sedang (6-20 orang)</option>
-                    <option value="Banyak">Banyak (>20 orang)</option>
+                  <label class="form-label">Aset Usaha</label>
+                  <select name="aset_usaha" class="form-control">
+                    <option value="Rendah">≤ 50 juta</option>
+                    <option value="Sedang">50 - 500 juta</option>
+                    <option value="Tinggi">> 500 juta</option>
+                  </select>
+                </div>
+
+                <div class="mb-3">
+                  <label class="form-label">Omzet Tahunan</label>
+                  <select name="omzet_tahunan" class="form-control">
+                    <option value="Rendah">≤ 300 juta</option>
+                    <option value="Sedang">300 juta - 2,5 M</option>
+                    <option value="Tinggi">> 2,5 M</option>
                   </select>
                 </div>
 
                 <div class="mb-3">
                   <label class="form-label">Modal Awal</label>
                   <select name="modal_awal" class="form-control">
-                    <option value="Rendah">Rendah (≤ 10 juta)</option>
-                    <option value="Sedang">Sedang (10-50 juta)</option>
-                    <option value="Tinggi">Tinggi (> 50 juta)</option>
+                    <option value="Rendah">≤ 10 juta</option>
+                    <option value="Sedang">10 - 50 juta</option>
+                    <option value="Tinggi">> 50 juta</option>
                   </select>
                 </div>
 
+                <!-- 📌 LEGALITAS & KEANGGOTAAN -->
+                <h6 class="fw-bold mt-4">Legalitas & Keanggotaan</h6>
                 <div class="mb-3">
                   <label class="form-label">Legalitas Usaha</label>
                   <select name="legalitas" class="form-control">
                     <option value="Ada">Ada</option>
                     <option value="Tidak Ada">Tidak Ada</option>
+                  </select>
+                </div>
+
+                <div class="mb-3">
+                  <label class="form-label">NPWP Usaha</label>
+                  <select name="npwp" class="form-control">
+                    <option value="Ada">Ada</option>
+                    <option value="Tidak Ada">Tidak Ada</option>
+                  </select>
+                </div>
+
+                <div class="mb-3">
+                  <label class="form-label">Sertifikasi Usaha</label>
+                  <select name="sertifikasi" class="form-control">
+                    <option value="Ya">Ya</option>
+                    <option value="Tidak">Tidak</option>
+                  </select>
+                </div>
+
+                <div class="mb-3">
+                  <label class="form-label">Keanggotaan Koperasi</label>
+                  <select name="koperasi" class="form-control">
+                    <option value="Ya">Ya</option>
+                    <option value="Tidak">Tidak</option>
+                  </select>
+                </div>
+
+                <!-- 📌 AKSES PERBANKAN & TEKNOLOGI -->
+                <h6 class="fw-bold mt-4">Akses Perbankan & Teknologi</h6>
+                <div class="mb-3">
+                  <label class="form-label">Akses Perbankan</label>
+                  <select name="akses_perbankan" class="form-control">
+                    <option value="Ya">Ya</option>
+                    <option value="Tidak">Tidak</option>
+                  </select>
+                </div>
+
+                <div class="mb-3">
+                  <label class="form-label">Pinjaman/Kredit UMKM</label>
+                  <select name="kredit_umkm" class="form-control">
+                    <option value="Ya">Ya</option>
+                    <option value="Tidak">Tidak</option>
+                  </select>
+                </div>
+
+                <div class="mb-3">
+                  <label class="form-label">Penggunaan Teknologi</label>
+                  <select name="teknologi" class="form-control">
+                    <option value="Manual">Manual</option>
+                    <option value="Semi-Digital">Semi-Digital</option>
+                    <option value="Digital">Digital</option>
+                  </select>
+                </div>
+
+                <div class="mb-3">
+                  <label class="form-label">Marketplace & Online Presence</label>
+                  <select name="marketplace" class="form-control">
+                    <option value="Tidak Online">Tidak Online</option>
+                    <option value="Sosial Media">Hanya Sosial Media</option>
+                    <option value="Marketplace">Marketplace & Website</option>
+                  </select>
+                </div>
+
+                <h6 class="fw-bold mt-4">Lain - lain</h6>
+                <div class="mb-3">
+                  <label class="form-label">Jumlah Karyawan</label>
+                  <select name="jumlah_karyawan" class="form-control">
+                    <option value="Sedikit">Sedikit (1-5 orang)</option>
+                    <option value="Sedang">Sedang (6-20 orang)</option>
+                    <option value="Banyak">Banyak (>20 orang)</option>
                   </select>
                 </div>
 
@@ -161,11 +244,21 @@
                   </select>
                 </div>
 
+                <div class="mb-3">
+                  <label class="form-label">Skala Usaha</label>
+                  <select name="skala_usaha" class="form-control">
+                    <option value="Lokal">Lokal</option>
+                    <option value="Regional">Regional</option>
+                    <option value="Nasional">Nasional</option>
+                  </select>
+                </div>
+
+                <!-- SUBMIT BUTTON -->
                 <div class="text-center">
                   <button type="submit" class="btn btn-primary">Simpan Data</button>
                 </div>
-              </form>
 
+              </form>
             </div>
           </div>
         </div>

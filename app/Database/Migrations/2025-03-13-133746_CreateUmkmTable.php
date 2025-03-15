@@ -44,19 +44,31 @@ class CreateUmkmTable extends Migration
                 'constraint' => '255',
                 'null'       => false,
             ],
+
             'pendapatan'      => [
                 'type'       => 'ENUM',
                 'constraint' => ['Rendah', 'Sedang', 'Tinggi'],
                 'null'       => false,
             ],
-            'jumlah_karyawan' => [
+            'aset_usaha'      => [
                 'type'       => 'ENUM',
-                'constraint' => ['Sedikit', 'Sedang', 'Banyak'],
+                'constraint' => ['Rendah', 'Sedang', 'Tinggi'],
+                'null'       => false,
+            ],
+            'omzet_tahunan'   => [
+                'type'       => 'ENUM',
+                'constraint' => ['Rendah', 'Sedang', 'Tinggi'],
                 'null'       => false,
             ],
             'modal_awal'      => [
                 'type'       => 'ENUM',
                 'constraint' => ['Rendah', 'Sedang', 'Tinggi'],
+                'null'       => false,
+            ],
+
+            'jumlah_karyawan' => [
+                'type'       => 'ENUM',
+                'constraint' => ['Sedikit', 'Sedang', 'Banyak'],
                 'null'       => false,
             ],
             'legalitas'       => [
@@ -79,6 +91,49 @@ class CreateUmkmTable extends Migration
                 'constraint' => ['Perkotaan', 'Pedesaan'],
                 'null'       => false,
             ],
+            'skala_usaha'     => [
+                'type'       => 'ENUM',
+                'constraint' => ['Lokal', 'Regional', 'Nasional'],
+                'null'       => false,
+            ],
+
+            'koperasi'        => [
+                'type'       => 'ENUM',
+                'constraint' => ['Ya', 'Tidak'],
+                'null'       => false,
+            ],
+            'npwp'            => [
+                'type'       => 'ENUM',
+                'constraint' => ['Ada', 'Tidak Ada'],
+                'null'       => false,
+            ],
+            'sertifikasi'     => [
+                'type'       => 'ENUM',
+                'constraint' => ['Ya', 'Tidak'],
+                'null'       => false,
+            ],
+
+            'akses_perbankan' => [
+                'type'       => 'ENUM',
+                'constraint' => ['Ya', 'Tidak'],
+                'null'       => false,
+            ],
+            'kredit_umkm'     => [
+                'type'       => 'ENUM',
+                'constraint' => ['Ya', 'Tidak'],
+                'null'       => false,
+            ],
+            'teknologi'       => [
+                'type'       => 'ENUM',
+                'constraint' => ['Manual', 'Semi-Digital', 'Digital'],
+                'null'       => false,
+            ],
+            'marketplace'     => [
+                'type'       => 'ENUM',
+                'constraint' => ['Tidak Online', 'Sosial Media', 'Marketplace'],
+                'null'       => false,
+            ],
+
             'created_at'      => [
                 'type'    => 'DATETIME',
                 'null'    => true,
