@@ -3,8 +3,10 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
+use App\Models\UmkmKelayakanModel;
 use CodeIgniter\HTTP\ResponseInterface;
 use App\Models\UmkmModel;
+use App\Models\UmkmPrediksiModel;
 
 class FormUMKMController extends BaseController
 {
@@ -16,6 +18,9 @@ class FormUMKMController extends BaseController
     public function submit()
     {
         $umkmModel = new UmkmModel();
+        $umkmModelKelayakan = new UmkmKelayakanModel();
+        $umkmModelPrediksi = new UmkmPrediksiModel();
+        $apiUrl = "http://127.0.0.1:5000/predict";
 
         // 📌 Konversi Kategori ke Angka
         $convert = [
@@ -74,25 +79,13 @@ class FormUMKMController extends BaseController
             'marketplace'     => $this->request->getPost('marketplace')
         ];
 
-        $convert_data = [
-            'pendapatan' => $convert[$this->request->getPost('pendapatan')],
-            'aset_usaha' => $convert[$this->request->getPost('aset_usaha')],
-            'omzet_tahunan' => $convert[$this->request->getPost('omzet_tahunan')],
-            'modal_awal' => $convert[$this->request->getPost('modal_awal')],
-            'jumlah_karyawan' => $convert[$this->request->getPost('jumlah_karyawan')],
-            'legalitas' => $convert[$this->request->getPost('legalitas')],
-            'lama_berdiri' => $convert[$this->request->getPost('lama_berdiri')],
-            'jenis_usaha' => $convert[$this->request->getPost('jenis_usaha')],
-            'lokasi_usaha' => $convert[$this->request->getPost('lokasi_usaha')],
-            'skala_usaha' => $convert[$this->request->getPost('skala_usaha')],
-            'koperasi' => $convert[$this->request->getPost('koperasi')],
-            'npwp' => $convert[$this->request->getPost('npwp')],
-            'sertifikasi' => $convert[$this->request->getPost('sertifikasi')],
-            'akses_perbankan' => $convert[$this->request->getPost('akses_perbankan')],
-            'kredit_umkm' => $convert[$this->request->getPost('kredit_umkm')],
-            'teknologi' => $convert[$this->request->getPost('teknologi')],
-            'marketplace' => $convert[$this->request->getPost('marketplace')]
-        ];
+        // 📌 Konversi Data ke Format Angka untuk API Flask
+        $convert_data = [];
+        foreach ($data as $key => $value) {
+            if (isset($convert[$value])) {
+                $convert_data[$key] = $convert[$value];
+            }
+        }
 
         // 📌 Validasi Input
         $validationRules = [
@@ -142,18 +135,51 @@ class FormUMKMController extends BaseController
             ])->setStatusCode(400);
         }
 
-        // 📌 Simpan Data ke Database
-        if ($umkmModel->insert($data)) {
-            return $this->response->setJSON([
-                'status' => 'success',
-                'message' => 'Data UMKM berhasil disimpan!',
-                'data'    => $data
-            ])->setStatusCode(200);
+        // Kirim data ke API Flask dengan cURL
+        $ch = curl_init($apiUrl);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($convert_data));
+        curl_setopt($ch, CURLOPT_HTTPHEADER, [
+            'Content-Type: application/json'
+        ]);
+
+        $response = curl_exec($ch);
+        $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        curl_close($ch);
+
+        // Konversi hasil JSON ke array PHP
+        $result = json_decode($response, true);
+
+        if ($httpCode == 200 && isset($result['status']) && $result['status'] == 'success') {
+            // 📌 Simpan Data UMKM ke Database
+            if ($umkmModel->insert($data)) {
+                $umkmId = $umkmModel->getInsertID();
+
+                // 📌 Simpan Data Kelayakan UMKM
+                $umkmModelKelayakan->insert(array_merge(['umkm_id' => $umkmId], $convert_data));
+
+                // 📌 Simpan Hasil Prediksi ke umkm_prediksi
+                $umkmModelPrediksi->insert([
+                    'umkm_id'                  => $umkmId,
+                    'prediksi'                 => $result['prediksi'],
+                    'probabilitas_layak'       => $result['probabilitas']['layak'],
+                    'probabilitas_tidak_layak' => $result['probabilitas']['tidak_layak']
+                ]);
+
+                return $this->response->setJSON([
+                    'status' => 'success',
+                    'message' => 'Data UMKM berhasil diproses!',
+                    'prediksi' => $result['prediksi'],
+                    'probabilitas' => $result['probabilitas'],
+                    'data'    => $data
+                ])->setStatusCode(200);
+            }
         } else {
             return $this->response->setJSON([
                 'status' => 'error',
-                'message' => 'Gagal menyimpan data!'
-            ])->setStatusCode(500);
+                'message' => $result['message'] ?? 'Terjadi kesalahan saat memproses data!'
+            ])->setStatusCode(400);
         }
     }
 }

@@ -4,15 +4,15 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class UmkmModel extends Model
+class UmkmKelayakanModel extends Model
 {
-    protected $table            = 'umkm';
+    protected $table            = 'umkm_kelayakan';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ['nama_usaha', 'pemilik_usaha', 'no_telepon', 'email', 'alamat_usaha', 'logo_usaha', 'pendapatan', 'aset_usaha', 'omzet_tahunan', 'jumlah_karyawan', 'modal_awal', 'legalitas', 'lama_berdiri', 'jenis_usaha', 'lokasi_usaha', 'skala_usaha', 'koperasi', 'npwp', 'sertifikasi', 'akses_perbankan', 'kredit_umkm', 'teknologi', 'marketplace'];
+    protected $allowedFields    = ['umkm_id', 'pendapatan', 'aset_usaha,', 'omzet_tahunan', 'modal_awal', 'jumlah_karyawan', 'legalitas', 'lama_berdiri', 'jenis_usaha', 'lokasi_usaha', 'skala_usaha', 'koperasi', 'npwp', 'sertifikasi', 'akses_perbankan', 'kredit_umkm', 'teknologi', 'marketplace'];
 
     protected bool $allowEmptyInserts = false;
     protected bool $updateOnlyChanged = true;
